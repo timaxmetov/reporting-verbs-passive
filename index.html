@@ -1,3 +1,14 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Reporting Verbs in the Passive — интерактивный разбор темы на русском: теория, инфографика, пошаговая схема, тренажёр, видео и упражнения с ответами. Уровень B1–B2.">
+<meta name="theme-color" content="#f96a00">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="Reporting Verbs in the Passive">
+<meta property="og:description" content="Интерактивный разбор пассивных конструкций с глаголами сообщения. Теория, схемы, тренажёр и упражнения.">
+<meta property="og:type" content="website">
 <title>Reporting Verbs in the Passive</title>
 <style>
 /* ==========================================================================
@@ -26,8 +37,8 @@
   --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(249,106,0,.14)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   margin:0;
   background:var(--bg);
@@ -53,8 +64,13 @@ button{font-family:inherit}
 /* ---------- «бумага» ---------- */
 .paper{
   max-width:1240px;margin:0 auto;background:var(--paper);
-  border-radius:0;box-shadow:var(--shadow);overflow:hidden;position:relative;
+  border-radius:0;box-shadow:var(--shadow);position:relative;
+  /* clip, а не hidden: hidden делает .paper скролл-контейнером
+     и ломает position:sticky у шапки внутри него */
+  overflow:clip;
 }
+/* подстраховка для движков без overflow:clip — блобы клипуем локально */
+.hero{overflow:hidden}
 @media(min-width:1024px){
   body{padding:14px}
   .paper{border-radius:18px}
@@ -623,7 +639,131 @@ section{position:relative}
 
 /* конфетти */
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
+
+/* ==========================================================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   ========================================================================== */
+
+/* переносы длинных английских конструкций */
+p,li,td,th,h2,h3,h4,.qtext,.formula,.f,.cd{overflow-wrap:break-word}
+
+/* мобильное меню-лента */
+.mnav{
+  display:flex;gap:7px;overflow-x:auto;padding:0 18px 9px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.mnav::-webkit-scrollbar{display:none}
+.mnav a{
+  flex:0 0 auto;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--ink2);
+  padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;
+  white-space:nowrap;transition:background .2s,color .2s,border-color .2s;
+}
+.mnav a.cur{background:var(--or);border-color:var(--or);color:#fff}
+@media(min-width:900px){.mnav{display:none}}
+
+/* активный пункт в десктопном меню */
+.nav a.cur{color:var(--ink);font-weight:600}
+.nav a.cur::after{width:100%}
+
+/* ---- телефоны ---- */
+@media(max-width:560px){
+  .hero{padding:20px 0 6px}
+  .topic-strip{padding:18px 0 2px;gap:8px 11px}
+  .topic-en{font-size:23px}
+  .topic-strip .ru{flex:1 1 100%;order:3}
+  .topic-strip .speak{order:2}
+
+  .bubble{width:100px;height:100px;font-size:10.5px;padding:12px}
+  .bubble .q{width:26px;height:26px;font-size:13px;top:-11px}
+  .scene{min-height:250px}
+
+  .cta{padding:17px 26px;font-size:13px;letter-spacing:.07em;width:100%}
+  .stat b{font-size:26px}
+
+  .card .ico{width:88px;height:88px}
+  .card .ico svg{width:38px;height:38px}
+  .card p{font-size:12.5px}
+
+  .story{padding:20px 16px}
+  .story p{font-size:15.5px}
+  .story .punch{font-size:16px}
+
+  .step-panel{padding:20px 16px;min-height:0}
+  .step-panel .num{font-size:58px;right:10px}
+  .step-nav{gap:8px}
+  .step-nav .mini-btn{flex:1 1 auto;text-align:center}
+
+  .pane{padding:18px 14px 22px}
+  .qtext{font-size:16px}
+  .tab{font-size:11px;padding:13px 4px}
+  .row-btns .mini-btn{flex:1 1 auto;text-align:center}
+
+  .ig .box{padding:18px 15px}
+  .ig .cap{padding-left:0}
+  .anat .w{font-size:14px;padding:10px 11px}
+  .anat .part .lg{font-size:10.5px;max-width:104px}
+
+  .exq{padding:15px 14px;font-size:14.5px}
+  .exa .in{padding:0 14px 16px 48px}
+
+  .quote{font-size:14.5px;padding:17px 18px}
+  .h2{font-size:21px}
+  .sec{padding:44px 0}
+}
+
+/* самые узкие экраны — сжимаем шапку */
+@media(max-width:400px){
+  .logo{font-size:12.5px;letter-spacing:.02em;gap:5px}
+  .logo .lg-mark{width:22px;height:22px;font-size:12px}
+  .voice-btn{padding:6px 10px;font-size:12px;gap:6px}
+  .wrap{padding:0 14px}
+  .mnav{padding:0 14px 9px}
+}
+
+/* крупнее зоны нажатия и без зума на iOS */
+@media(max-width:768px){
+  .speak{width:34px;height:34px}
+  .answer-in{font-size:16px}
+  .mini-btn{padding:12px 16px}
+}
+
+/* HUD на телефоне: меньше и с учётом «челки» */
+@media(max-width:560px){
+  #hud{right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+  #hud .ring{width:50px;height:50px}
+  #hud .ring svg{width:50px;height:50px}
+  #hud .ring span{font-size:11.5px}
+  #hud .panel{width:min(258px,calc(100vw - 20px))}
+}
+
+/* сенсорные экраны: убираем «залипающие» hover-состояния */
+@media(hover:none){
+  .cta:hover{transform:none;box-shadow:0 14px 30px rgba(249,106,0,.36)}
+  .cta.ghost:hover{transform:none;border-color:var(--line);color:var(--ink)}
+  .card:hover .ico::before{transform:scale(.86)}
+  .card:hover .ico svg{transform:none}
+  .tbox:hover{transform:none;box-shadow:none;border-color:var(--line)}
+  .ex li:hover{background:#fafbfc;transform:none}
+  .speak:hover{background:#fff;color:var(--bl);border-color:var(--line);transform:none}
+  .mini-btn:hover:not(:disabled){border-color:var(--line);color:var(--ink)}
+  .mini-btn.solid:hover{transform:none;color:#fff}
+  .opt:hover:not(:disabled){transform:none;background:#fff;border-color:var(--line)}
+  .chip:hover{transform:none;border-color:var(--line);color:var(--ink)}
+  .vid:hover{transform:none;box-shadow:none}
+  .vid:hover .play{transform:translate(-50%,-50%)}
+  .vid:hover .poster .thumb{transform:none}
+  .ig .box:hover{box-shadow:none;border-color:var(--line)}
+  .anat .part:hover .w{transform:none;box-shadow:none}
+  .fork .arm:hover{transform:none}
+  .tl .pt:hover .mk{transform:none}
+  .pipe .st:hover{transform:none;border-color:var(--line);box-shadow:none}
+  .pipe .st:hover .cn{background:radial-gradient(circle at 36% 30%,var(--bl2),var(--bl));box-shadow:0 6px 16px rgba(76,184,228,.42)}
+  #hud .ring:hover{transform:none}
+  .nav a:hover::after{width:0}
+}
 </style>
+</head>
+<body>
 
 <div id="scrollbar"></div>
 
@@ -646,6 +786,14 @@ section{position:relative}
       <span id="voiceLabel">Озвучка</span>
     </button>
   </div>
+  <nav class="mnav" aria-label="Разделы сайта">
+    <a href="#theory">Теория</a>
+    <a href="#info">Инфографика</a>
+    <a href="#diagram">Схема</a>
+    <a href="#trainer">Тренажёр</a>
+    <a href="#video">Видео</a>
+    <a href="#exercises">Упражнения</a>
+  </nav>
 </header>
 
 <div class="wrap" id="top">
@@ -1126,7 +1274,7 @@ section{position:relative}
     <button class="reset" id="hudReset">Сбросить прогресс</button>
   </div>
   <div class="ring" id="hudRing">
-    <svg width="58" height="58"><circle cx="29" cy="29" r="24" fill="none" stroke="#eef1f4" stroke-width="5"/><circle id="ringArc" cx="29" cy="29" r="24" fill="none" stroke="#f96a00" stroke-width="5" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" style="transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)"/></svg>
+    <svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="24" fill="none" stroke="#eef1f4" stroke-width="5"/><circle id="ringArc" cx="29" cy="29" r="24" fill="none" stroke="#f96a00" stroke-width="5" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" style="transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)"/></svg>
     <span id="ringPct">0%</span>
   </div>
 </div>
@@ -1756,13 +1904,45 @@ window.addEventListener('load', ()=>{
   setTimeout(()=>{ if(!window.innerHeight || !window.innerWidth) revealAll(); }, 400);
 });
 
-/* плавная прокрутка по якорям с учётом липкой шапки */
+/* ==========================================================================
+   10. НАВИГАЦИЯ: отступ по реальной высоте шапки + подсветка раздела
+   ========================================================================== */
+const header = document.querySelector('.top');
+const headOffset = ()=> header.getBoundingClientRect().height + 10;
+
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', e=>{
     const t = document.querySelector(a.getAttribute('href'));
     if(!t) return;
     e.preventDefault();
-    window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+    window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - headOffset(), behavior:'smooth'});
   });
 });
+
+/* подсветка текущего раздела в мобильной ленте и в меню */
+const SECT = ['theory','info','diagram','trainer','video','exercises'];
+const navLinks = [...document.querySelectorAll('.mnav a, .nav a')];
+let spyTick = false;
+function spy(){
+  /* координаты относительно вьюпорта: offsetTop считался бы от .paper, а не от страницы */
+  const line = headOffset() + 60;
+  let cur = null;
+  SECT.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top <= line) cur = id;
+  });
+  navLinks.forEach(a=>{
+    const on = cur && a.getAttribute('href') === '#' + cur;
+    a.classList.toggle('cur', !!on);
+    if(on && a.parentElement.classList.contains('mnav')){
+      const p = a.parentElement, l = a.offsetLeft - p.clientWidth / 2 + a.offsetWidth / 2;
+      p.scrollTo({left: Math.max(0, l), behavior:'smooth'});
+    }
+  });
+  spyTick = false;
+}
+window.addEventListener('scroll', ()=>{ if(!spyTick){ requestAnimationFrame(spy); spyTick = true; } }, {passive:true});
+spy();
 </script>
+</body>
+</html>
